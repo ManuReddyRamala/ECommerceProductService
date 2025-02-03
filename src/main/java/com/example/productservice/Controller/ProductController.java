@@ -29,6 +29,7 @@ public class ProductController {
 
     @PostMapping("/")
     public Product createProduct(@RequestBody Product product) {
-        return null;
+
+        return productService.createProduct(product);
     }
 }

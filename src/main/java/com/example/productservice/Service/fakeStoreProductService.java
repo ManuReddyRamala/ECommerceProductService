@@ -1,5 +1,6 @@
 package com.example.productservice.Service;
 
+import com.example.productservice.Dto.FakeStoreRequestDto;
 import com.example.productservice.Dto.FakeStoreResponseDto;
 import com.example.productservice.Model.Category;
 import com.example.productservice.Model.Product;
@@ -44,6 +45,16 @@ public class fakeStoreProductService implements ProductService{
         return products;
     }
 
+    @Override
+    public Product createProduct(Product product) {
+        FakeStoreRequestDto frdto = new FakeStoreRequestDto();
+        frdto=convertProductToFakeStoreRequestDto(product);
+
+        FakeStoreResponseDto fdto=restTemplate.postForObject("https://fakestoreapi.com/products",frdto,FakeStoreResponseDto.class);
+
+        return convertFakeStoreDtoToProduct(fdto);
+    }
+
     public Product convertFakeStoreDtoToProduct(FakeStoreResponseDto fdto)
     {
         Product p=new Product();
@@ -59,5 +70,15 @@ public class fakeStoreProductService implements ProductService{
 
         return p;
 
+    }
+    public FakeStoreRequestDto convertProductToFakeStoreRequestDto(Product p)
+    {
+        FakeStoreRequestDto fdto = new FakeStoreRequestDto();
+        fdto.setTitle(p.getTitle());
+        fdto.setDescription(p.getDescription());
+        fdto.setPrice(p.getPrice());
+        fdto.setImage(p.getImage());
+        fdto.setCategory(p.getCategory().getTitle());
+        return fdto;
     }
 }

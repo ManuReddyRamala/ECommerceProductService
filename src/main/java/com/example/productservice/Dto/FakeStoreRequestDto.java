@@ -1,5 +1,8 @@
 package com.example.productservice.Dto;
 
+import lombok.Data;
+
+@Data
 public class FakeStoreRequestDto {
     private Long id;
     private String title;
