@@ -65,7 +65,6 @@ public class fakeStoreProductService implements ProductService{
         p.setImage(fdto.getImage());
         Category c=new Category();
         c.setTitle(fdto.getCategory());
-        c.setId(fdto.getRate());
         p.setCategory(c);
 
         return p;
