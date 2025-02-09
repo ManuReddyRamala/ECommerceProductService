@@ -1,5 +1,7 @@
 package com.example.productservice.Model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
@@ -11,7 +13,8 @@ import java.util.Date;
 public class BaseModel {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Date created_at;
     private Date updated_at;
